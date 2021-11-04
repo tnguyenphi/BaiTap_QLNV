@@ -9,18 +9,10 @@ function getELE(id){
 }
 
 function setLocalStorage(mangNV) {
-    //localStorage : object có sẵn của js
-    // localStorage phải lưu thành kiểu JSON
-    // JSON.stringify: chuyển từ kiểu biến JS sang kiểu JSON
     localStorage.setItem("DSNV", JSON.stringify(mangNV));
 }
 
 function getLocalStorage(mangNV) {
-    // Khi lấy lên , localStorage sẽ trả kết quả là JSON
-    //JSON.parse chuyển từ JSON sang mảng
-    // nếu ko có localStorage thì trả về null
-    //null là kiểu dữ liệu trong JS
-    // dssv.mangSV = null => đổi sang kiểu null
     if (localStorage.getItem("DSNV") != null) {
         dsnv.mangNV = JSON.parse(localStorage.getItem("DSNV"));
         hienThiTable(dsnv.mangNV);
@@ -83,11 +75,11 @@ function xoaNhanVien(tk){
     setLocalStorage(dsnv.mangNV);
     hienThiTable(dsnv.mangNV);
 }
-
-// function resetForm(){
-//     getELE("myModal").reset();
-//     getELE("tknv").disabled = false;
-// }
+//reset form mỗi khi nhấn vào button thêm sinh viên
+function resetForm(){
+    getELE("resetForm").reset();
+    getELE("tknv").disabled = false;
+}
 
 //Lấy thông tin chi tiết nv đẩy lên form
 function xemChiTiet(tk){
@@ -125,7 +117,8 @@ function capNhat(){
     var nv = new NhanVien(taiKhoanNV,tenNV,email,matKhau,date,Number(salary),position, Number(hours));
     nv.luong = nv.tongLuong();
     nv.xepLoai = nv.xepLoai();
-
+    nv.viTri = nv.showPosition();
+    
     dsnv.updateNV(nv);
     hienThiTable(dsnv.mangNV);
     setLocalStorage(dsnv.mangNV);
