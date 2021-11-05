@@ -49,6 +49,12 @@ function layThongTinNV() {
     //Kiểm tra vị trí phải chọn vị trí
     isValid &= validation.checkSelect("chucvu","Chọn chức vụ","tbChucVu") ;
 
+    // kiểm tra lương: ko bỏ trống , định dạng số, trong khoảng 1.000.000 - 20.000.000
+    isValid &= validation.checkEmpty(salary,"Lương không được để trống","tbLuongCB") && validation.checkNumber(salary,"Lương phải là kiểu Số","tbLuongCB") && validation.checkSalary(salary,"Lương phải từ 1tr-20tr","tbLuongCB");
+
+    //kiểm tra giờ làm : ko bỏ trống , định dạng số, trong khoảng 80-200
+    isValid &= validation.checkEmpty(hours,"Giờ làm không được để trống","tbGiolam") && validation.checkNumber(hours,"Giờ làm phải là kiểu Số","tbGiolam") && validation.checkHour(hours,"Giờ làm phải từ 80h - 200h","tbGiolam");
+
 
     if (isValid) {
         var nv = new NhanVien(taiKhoanNV, tenNV, email, matKhau, date, Number(salary), position, Number(hours));
