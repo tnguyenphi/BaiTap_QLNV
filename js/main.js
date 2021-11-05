@@ -108,6 +108,11 @@ function xoaNhanVien(tk) {
 function resetForm() {
     getELE("resetForm").reset();
     getELE("tknv").disabled = false;
+    //reset thông báo mỗi lần nhấn vào
+    resetSpan()
+}
+//tạo hàm reser span
+function resetSpan(){
     getELE("tbTKNV").innerHTML = "";
     getELE("tbTKNV").style.display = "none";
     getELE("tbTen").innerHTML = "";
@@ -142,6 +147,7 @@ function xemChiTiet(tk) {
     } else {
         console.log("Không tìm được")
     }
+    resetSpan()
 }
 
 
