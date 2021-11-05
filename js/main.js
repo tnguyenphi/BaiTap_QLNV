@@ -152,52 +152,52 @@ function capNhat() {
     var email = getELE("email").value;
     var matKhau = getELE("password").value;
     var date = getELE("datepicker").value;
-    var salary = Number(getELE("luongCB").value);
+    var salary = getELE("luongCB").value;
     var position = getELE("chucvu").value;
-    var hours = Number(getELE("gioLam").value);
-    // var isValid = true;
+    var hours = getELE("gioLam").value;
+    var isValid = true;
 
-    // // Kiểm tra tài khoảng NV không được trùng và không được để trống
+    // Kiểm tra tài khoảng NV không được trùng và không được để trống
 
-    // isValid &= validation.checkEmpty(taiKhoanNV, "Tài khoản NV không được để trống", "tbTKNV");
-    // // Kiểm tra tên NV: Kiểm tra rỗng, kiểm tra ký tự chữ
-    // isValid &= validation.checkEmpty(tenNV, "Tên NV không được để trống", "tbTen") && validation.checkName(tenNV, "Tên NV Phải là kiểu chữ", "tbTen");
+    isValid &= validation.checkEmpty(taiKhoanNV, "Tài khoản NV không được để trống", "tbTKNV");
+    // Kiểm tra tên NV: Kiểm tra rỗng, kiểm tra ký tự chữ
+    isValid &= validation.checkEmpty(tenNV, "Tên NV không được để trống", "tbTen") && validation.checkName(tenNV, "Tên NV Phải là kiểu chữ", "tbTen");
 
-    // // Kiểm tra email: Email phải đúng định dạng và không để trống
-    // isValid &= validation.checkEmpty(email, "Email không được để trống", "tbEmail") && validation.checkEmail(email, "Email phải đúng định dạng", "tbEmail");
+    // Kiểm tra email: Email phải đúng định dạng và không để trống
+    isValid &= validation.checkEmpty(email, "Email không được để trống", "tbEmail") && validation.checkEmail(email, "Email phải đúng định dạng", "tbEmail");
 
-    // //kiểm tra pass: không được để trống và phải đúng địng dạng pass
-    // isValid &= validation.checkEmpty(matKhau, "Password không được để trống", "tbMatKhau") && validation.checkPass(matKhau, "Password phải đúng định dạng", "tbMatKhau");
-    // //Kiểm tra vị trí phải chọn vị trí
-    // isValid &= validation.checkSelect("chucvu", "Chọn chức vụ", "tbChucVu");
+    //kiểm tra pass: không được để trống và phải đúng địng dạng pass
+    isValid &= validation.checkEmpty(matKhau, "Password không được để trống", "tbMatKhau") && validation.checkPass(matKhau, "Password phải đúng định dạng", "tbMatKhau");
+    //Kiểm tra vị trí phải chọn vị trí
+    isValid &= validation.checkSelect("chucvu", "Chọn chức vụ", "tbChucVu");
 
-    // // kiểm tra lương: ko bỏ trống , định dạng số, trong khoảng 1.000.000 - 20.000.000
-    // isValid &= validation.checkEmpty(salary, "Lương không được để trống", "tbLuongCB") && validation.checkNumber(salary, "Lương phải là kiểu Số", "tbLuongCB") && validation.checkSalary(salary, "Lương phải từ 1tr-20tr", "tbLuongCB");
+    // kiểm tra lương: ko bỏ trống , định dạng số, trong khoảng 1.000.000 - 20.000.000
+    isValid &= validation.checkEmpty(salary, "Lương không được để trống", "tbLuongCB") && validation.checkNumber(salary, "Lương phải là kiểu Số", "tbLuongCB") && validation.checkSalary(salary, "Lương phải từ 1tr-20tr", "tbLuongCB");
 
-    // //kiểm tra giờ làm : ko bỏ trống , định dạng số, trong khoảng 80-200
-    // isValid &= validation.checkEmpty(hours, "Giờ làm không được để trống", "tbGiolam") && validation.checkNumber(hours, "Giờ làm phải là kiểu Số", "tbGiolam") && validation.checkHour(hours, "Giờ làm phải từ 80h - 200h", "tbGiolam");
-    // //checkday
+    //kiểm tra giờ làm : ko bỏ trống , định dạng số, trong khoảng 80-200
+    isValid &= validation.checkEmpty(hours, "Giờ làm không được để trống", "tbGiolam") && validation.checkNumber(hours, "Giờ làm phải là kiểu Số", "tbGiolam") && validation.checkHour(hours, "Giờ làm phải từ 80h - 200h", "tbGiolam");
+    //checkday
 
-    // isValid &= validation.checkEmpty(date, "Ngày  làm không được để trống", "tbNgay") && validation.checkDay(date, "Ngày  làm phải là kiểu mm/dd/yy", "tbNgay");
+    isValid &= validation.checkEmpty(date, "Ngày  làm không được để trống", "tbNgay") && validation.checkDay(date, "Ngày  làm phải là kiểu mm/dd/yy", "tbNgay");
 
-    // if (isValid) {
-    //     var nv = new NhanVien(taiKhoanNV, tenNV, email, matKhau, date, salary, position, hours);
-    //     nv.luong = nv.tongLuong();
-    //     nv.xepLoai = nv.xepLoai();
-    //     nv.viTri = nv.showPosition();
+    if (isValid) {
+        var nv = new NhanVien(taiKhoanNV, tenNV, email, matKhau, date, salary, position, hours);
+        nv.luong = nv.tongLuong();
+        nv.xepLoai = nv.xepLoai();
+        nv.viTri = nv.showPosition();
+    
+        dsnv.updateNV(nv);
+        setLocalStorage(dsnv.mangNV);
+        hienThiTable(dsnv.mangNV);
+    }
+    // var nv = new NhanVien(taiKhoanNV, tenNV, email, matKhau, date, salary, position, hours);
+    // nv.luong = nv.tongLuong();
+    // nv.xepLoai = nv.xepLoai();
+    // nv.viTri = nv.showPosition();
 
-    //     dsnv.updateNV(nv);
-    //     hienThiTable(dsnv.mangNV);
-    //     setLocalStorage(dsnv.mangNV);
-    // }
-    var nv = new NhanVien(taiKhoanNV, tenNV, email, matKhau, date, salary, position, hours);
-    nv.luong = nv.tongLuong();
-    nv.xepLoai = nv.xepLoai();
-    nv.viTri = nv.showPosition();
-
-    dsnv.updateNV(nv);
-    hienThiTable(dsnv.mangNV);
-    setLocalStorage(dsnv.mangNV);
+    // dsnv.updateNV(nv);
+    // setLocalStorage(dsnv.mangNV);
+    // hienThiTable(dsnv.mangNV);
 }
 
 // Người dùng gõ input thì lập tức search
