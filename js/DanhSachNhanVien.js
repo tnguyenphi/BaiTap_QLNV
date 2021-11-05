@@ -50,3 +50,22 @@ function DanhSachNhanVien(){
         }
     }
 }
+
+DanhSachNhanVien.prototype.searchName = function (tuKhoa){
+    var mangTK = [];
+    // từ khóa be => phải tìm đc sinh viên có chưa từ be (bé Ben Bé BÉ)
+    // chuyển từ khóa về kiểu chữ thường và xóa khoảng trắng
+    var tuTK = tuKhoa.trim().toLowerCase()
+    this.mangNV.map(function(nv){
+        //chuyển tên sv về kiểu chữ thường
+        var xepLoai = nv.xepLoai.toLowerCase();
+
+        // kiểm tra tên sv có chứa từ khóa hay không
+        if (xepLoai.indexOf(tuTK) > -1){
+            console.log("Tìm thấy tên sv");
+            //nếu tìm thấy thì lưu sv vào trong mangTK
+            mangTK.push(nv);
+        }
+    });
+    return mangTK;
+}

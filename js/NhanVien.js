@@ -27,7 +27,7 @@ function NhanVien(tk,ten, email, pass, date, salary, position, hours){
     this.xepLoai = function (){
         var content = ""
         if (0<this.hours && this.hours<160){
-            content+= "Xếp loại TB";
+            content+= "Xếp loại Trung Bình";
             console.log("Xếp loại TB");
         }else if (160<=this.hours && this.hours<176){
             content+= "Xếp loại Khá";

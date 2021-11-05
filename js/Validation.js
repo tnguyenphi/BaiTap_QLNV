@@ -119,7 +119,7 @@ function Validation() {
 
     //checkSalary
     this.checkSalary = function (value, message, spanID) {
-        if (value > 1000000 && value< 20000000) {
+        if (value >= 1000000 && value<= 20000000) {
             //hợp lệ
             document.getElementById(spanID).innerHTML = "";
             document.getElementById(spanID).style.display = "none";
@@ -132,12 +132,27 @@ function Validation() {
 
      //checkHours
      this.checkHour = function (value, message, spanID) {
-        if (value > 80 && value< 200) {
+        if (value >= 80 && value <= 200) {
             //hợp lệ
             document.getElementById(spanID).innerHTML = "";
             document.getElementById(spanID).style.display = "none";
             return true;
         }
+        document.getElementById(spanID).innerHTML = message;
+        document.getElementById(spanID).style.display = "block";
+        return false;
+    }
+
+    //checkDAY
+    this.checkDay = function (value, message, spanID) {
+        var pattern = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
+        if (value.match(pattern)) {
+            //hợp lệ
+            document.getElementById(spanID).innerHTML = "";
+            document.getElementById(spanID).style.display = "none";
+            return true;
+        }
+        // không hợp lệ
         document.getElementById(spanID).innerHTML = message;
         document.getElementById(spanID).style.display = "block";
         return false;
